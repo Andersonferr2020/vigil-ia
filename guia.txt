@@ -1,0 +1,11 @@
+create_frames_from_videos.py
+auto_rotulagem.py
+dividir_dataset.py
+extracao_series_fuzzy.py
+treinar_yolo.py
+avaliar_teste_yolo.py
+construir_fuzzy.py
+processar_fuzzy_completo.py | processar_fuzzy_corrigido.py
+otimizar_fuzzy.py
+classificar_video.py
+classificar_todos_videos.py

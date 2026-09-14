@@ -1,0 +1,15 @@
+.venv/
+.venv_gpu/
+__pycache__/
+*.whl
+*.mp4
+01_videos_brutos/
+02_frames_extraidos/
+03_rotulos_yolo/
+04_dataset_fuzzy/
+data_visualizer/
+dataset_yolo_final/
+runs/
+weights/
+yolov8n-pose.pt
+yolov8n.pt
