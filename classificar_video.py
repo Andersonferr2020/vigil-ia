@@ -49,7 +49,7 @@ def criar_motor_fuzzy():
 
 def localizar_modelo():
     candidatos = [
-        Path("runs/detect/treino_vigilia/weights/best.pt"),
+        #Path("runs/detect/treino_vigilia/weights/best.pt"),
         Path("runs/detect/runs/detect/treino_vigilia/weights/best.pt"),
     ]
     for caminho in candidatos:

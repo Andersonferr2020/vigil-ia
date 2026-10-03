@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vigil-IA | Acesso</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <div class="brand-mark">V</div>
+    <p class="eyebrow">VIGIL-IA / DATA VISUALIZER</p>
+    <h1>Entre no centro de monitoramento.</h1>
+    <p class="muted">Acompanhe vídeos analisados, riscos e evidências em um só lugar.</p>
+    <form method="post" class="login-form">
+      <label>Usuário<input name="username" required autocomplete="username"></label>
+      <label>Senha<input name="password" type="password" required autocomplete="current-password"></label>
+      {% if error %}<p class="form-error">{{ error }}</p>{% endif %}
+      <button class="primary-button" type="submit">Acessar painel</button>
+    </form>
+    <p class="hint">MVP: admin / vigil-ia</p>
+  </main>
+</body>
+</html>

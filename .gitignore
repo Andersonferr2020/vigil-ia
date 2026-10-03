@@ -7,9 +7,15 @@ __pycache__/
 02_frames_extraidos/
 03_rotulos_yolo/
 04_dataset_fuzzy/
-data_visualizer/
+data_visualizer/__pycache__/
+data_visualizer/cache/
+data_visualizer/vigil_ia.sqlite3
 dataset_yolo_final/
+rastreamento_pose_amostra/
+rastreamento_pose_erros/
 runs/
 weights/
 yolov8n-pose.pt
 yolov8n.pt
+yolo11n-pose.pt
+tests/
