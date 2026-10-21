@@ -1,62 +1,74 @@
-import os
+
 import cv2
 from pathlib import Path
 
+
 def extrair_frames_categoria(pasta_entrada, pasta_saida, intervalo_frames=3):
-    """
-    Varre os vídeos de 'pasta_entrada' e salva os quadros a cada N frames em 'pasta_saida'.
-    """
-    Path(pasta_saida).mkdir(parents=True, exist_ok=True)
-    
-    extensoes_suportadas = ('.mp4', '.avi', '.mov', '.mkv')
-    videos = [f for f in os.listdir(pasta_entrada) if f.lower().endswith(extensoes_suportadas)]
-    
-    print(f"=== Processando diretório: {pasta_entrada} ===")
-    print(f"Total de vídeos encontrados: {len(videos)}")
-    
+    pasta_entrada = Path(pasta_entrada)
+    pasta_saida = Path(pasta_saida)
+
+    if not pasta_entrada.exists():
+        print(f"[ERRO] Pasta não encontrada: {pasta_entrada}")
+        return
+
+    pasta_saida.mkdir(parents=True, exist_ok=True)
+
+    extensoes = {".mp4", ".avi", ".mov", ".mkv"}
+    videos = sorted(
+        p for p in pasta_entrada.iterdir()
+        if p.is_file() and p.suffix.lower() in extensoes
+    )
+
+    print(f"\n=== Processando: {pasta_entrada} ===")
+    print(f"Vídeos encontrados: {len(videos)}")
+
     total_frames = 0
-    for video_nome in videos:
-        caminho_video = os.path.join(pasta_entrada, video_nome)
-        cap = cv2.VideoCapture(caminho_video)
-        
-        nome_base = os.path.splitext(video_nome)
+
+    for video in videos:
+        cap = cv2.VideoCapture(str(video))
+
+        if not cap.isOpened():
+            print(f"[AVISO] Não foi possível abrir: {video.name}")
+            continue
+
+        nome_base = video.stem
         count = 0
-        frame_id = 0
-        
-        while cap.isOpened():
+        frames_salvos = 0
+
+        while True:
             ret, frame = cap.read()
             if not ret:
                 break
-            
-            # Amostragem: salva 1 quadro a cada 'intervalo_frames'
-            if count % intervalo_frames == 0:
-                nome_frame = f"{nome_base}_f{frame_id:05d}.jpg"
-                caminho_salvar = os.path.join(pasta_saida, nome_frame)
-                cv2.imwrite(caminho_salvar, frame)
-                frame_id += 1
-                total_frames += 1
-                
-            count += 1
-            
-        cap.release()
-        print(f"  -> Vídeo '{video_nome}': {frame_id} imagens geradas.")
-        
-    print(f"Concluído! Total de imagens salvas em '{pasta_saida}': {total_frames}\n")
 
-# Execução do fatiamento local
+            if count % intervalo_frames == 0:
+                nome_frame = f"{nome_base}_f{count:07d}.jpg"
+                caminho_salvar = pasta_saida / nome_frame
+
+                if cv2.imwrite(str(caminho_salvar), frame):
+                    frames_salvos += 1
+                    total_frames += 1
+                else:
+                    print(f"[AVISO] Falha ao salvar: {caminho_salvar}")
+
+            count += 1
+
+        cap.release()
+        print(f"  {video.name}: {frames_salvos} imagens")
+
+    print(f"Total de imagens salvas: {total_frames}")
+
+
 if __name__ == "__main__":
-    base_dir = "."  # Executando dentro de 'vigilia_dataset'
-    
-    # 1. Fatiar vídeos de ações normais
+    base_dir = Path(__file__).resolve().parent
+
     extrair_frames_categoria(
-        pasta_entrada=os.path.join(base_dir, "01_videos_brutos", "normais"),
-        pasta_saida=os.path.join(base_dir, "02_frames_extraidos", "normais"),
-        intervalo_frames=3  # Extrai 1 a cada 3 quadros
+        base_dir / "Dataset" / "Normal",
+        base_dir / "02_frames_extraidos" / "normais",
+        intervalo_frames=3,
     )
-    
-    # 2. Fatiar vídeos de ações suspeitas
+
     extrair_frames_categoria(
-        pasta_entrada=os.path.join(base_dir, "01_videos_brutos", "suspeitos"),
-        pasta_saida=os.path.join(base_dir, "02_frames_extraidos", "suspeitos"),
-        intervalo_frames=3
+        base_dir / "Dataset" / "Shoplifting",
+        base_dir / "02_frames_extraidos" / "suspeitos",
+        intervalo_frames=3,
     )

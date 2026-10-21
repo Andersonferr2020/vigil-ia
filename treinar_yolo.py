@@ -21,7 +21,7 @@ def executar_treinamento_leve():
         epochs=50,
         patience=10,        # Early stopping após 10 épocas sem melhora
         imgsz=640,          # Preserva mais detalhes dos objetos
-        batch=8,            # Configuração solicitada; pode exigir mais RAM/VRAM
+        batch=2,            # Configuração solicitada; pode exigir mais RAM/VRAM
         device=0,           # GPU CUDA
         workers=2,          # Evita picos de RAM no Windows
         cache=False,        # Não carrega as 20 mil imagens descompactadas na RAM

@@ -19,3 +19,18 @@ yolov8n-pose.pt
 yolov8n.pt
 yolo11n-pose.pt
 tests/
+# Dados e backups da revisao de rotulos
+dataset_yolo_corrigido/
+labels_revisados/
+labels_backup_original/
+backup_treinamento_original/
+
+# Imagens e arquivos de inspecao
+inspecao_rotulos/
+teste_frames/
+teste_rotulos/
+teste_shoplifting.jpg
+
+# Modelos e caches adicionais
+*.pt
+*.cache
