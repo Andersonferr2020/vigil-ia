@@ -1,0 +1,4 @@
+Dataset/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+dataset_yolo_revisado/images/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+runs/detect/treino_vigilia_M4_revisado/weights/best.pt filter=lfs diff=lfs merge=lfs -text
+yolov8n-pose.pt filter=lfs diff=lfs merge=lfs -text

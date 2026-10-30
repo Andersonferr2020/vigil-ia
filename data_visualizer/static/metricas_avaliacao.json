@@ -1,0 +1,28 @@
+{
+  "Original": {
+    "avaliados": 182,
+    "pendentes": 0,
+    "acuracia": 70.88,
+    "precisao": 76.0,
+    "recall": 61.96,
+    "f1": 68.26,
+    "especificidade": 80.0,
+    "tp": 57,
+    "fn": 35,
+    "fp": 18,
+    "tn": 72
+  },
+  "V2": {
+    "avaliados": 180,
+    "pendentes": 2,
+    "acuracia": 72.22,
+    "precisao": 79.71,
+    "recall": 60.44,
+    "f1": 68.75,
+    "especificidade": 84.27,
+    "tp": 55,
+    "fn": 36,
+    "fp": 14,
+    "tn": 75
+  }
+}

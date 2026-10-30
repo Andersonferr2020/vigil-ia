@@ -1,0 +1,59 @@
+
+C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (1).mp4 - Original - Codigo 0
+Frames processados: 100/318
+Frames processados: 200/318
+Frames processados: 300/318
+
+=== RESULTADO DO V+�DEO ===
+V+�deo: C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (1).mp4
+Frames processados: 318
+Risco m+�dio: 0.00%
+Risco m+�ximo: 0.00%
+Frames acima do limiar: 0 (0.00%)
+Frames sem detec+�+�o completa: 318
+Classifica+�+�o: NAO_FURTO
+
+
+C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (1).mp4 - V2 - Codigo 0
+Frames processados: 100/318
+Frames processados: 200/318
+Frames processados: 300/318
+
+=== RESULTADO DO V+�DEO ===
+V+�deo: C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (1).mp4
+Frames processados: 318
+Risco m+�dio: 0.00%
+Risco m+�ximo: 0.00%
+Frames acima do limiar: 0 (0.00%)
+Frames sem detec+�+�o completa: 318
+Classifica+�+�o: NAO_FURTO
+
+
+C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (10).mp4 - Original - Codigo 0
+Frames processados: 100/351
+Frames processados: 200/351
+Frames processados: 300/351
+
+=== RESULTADO DO V+�DEO ===
+V+�deo: C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (10).mp4
+Frames processados: 351
+Risco m+�dio: 0.00%
+Risco m+�ximo: 0.00%
+Frames acima do limiar: 0 (0.00%)
+Frames sem detec+�+�o completa: 351
+Classifica+�+�o: NAO_FURTO
+
+
+C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (10).mp4 - V2 - Codigo 0
+Frames processados: 100/351
+Frames processados: 200/351
+Frames processados: 300/351
+
+=== RESULTADO DO V+�DEO ===
+V+�deo: C:\Users\Professor\Documents\Projetos\vigil-ia\Dataset\Normal\Normal (10).mp4
+Frames processados: 351
+Risco m+�dio: 0.00%
+Risco m+�ximo: 0.00%
+Frames acima do limiar: 0 (0.00%)
+Frames sem detec+�+�o completa: 351
+Classifica+�+�o: NAO_FURTO

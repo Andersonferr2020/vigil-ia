@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+import os
 import subprocess
 import sys
 import traceback
@@ -17,18 +18,18 @@ except ImportError:
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-VIDEO_ROOT = ROOT / "01_videos_brutos"
+VIDEO_ROOT = ROOT / "Dataset"
 WEB_VIDEO_ROOT = Path(__file__).resolve().parent / "cache" / "videos"
 ANNOTATED_VIDEO_ROOT = Path(__file__).resolve().parent / "cache" / "annotated"
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "vigil-ia-mvp-change-me"
-socketio = SocketIO(app, cors_allowed_origins="*")
+app.config["SECRET_KEY"] = os.environ.get("VIGILIA_SECRET_KEY", "vigil-ia-mvp-change-me")
+socketio = SocketIO(app)
 processing_lock = Lock()
 conversion_lock = Lock()
 initialize()
 
-USERS = {"admin": "vigil-ia"}
+USERS = {os.environ.get("VIGILIA_USER", "admin"): os.environ.get("VIGILIA_PASSWORD", "vigil-ia")}
 
 
 def logged_in():

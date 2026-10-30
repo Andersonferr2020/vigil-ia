@@ -43,7 +43,142 @@
     </section>
     <section class="panel library-panel" id="library"><div class="panel-heading"><div><h2>Biblioteca de vídeos</h2></div></div><div class="table-wrap"><table class="video-table"><thead id="video-table-header" tabindex="-1"><tr><th></th><th>Vídeo</th><th>Status</th><th>Resultado</th><th>Data/hora</th><th>Usuário</th><th>Ação</th></tr></thead><tbody id="video-list"></tbody></table></div><div class="pagination"><div class="pagination-actions"><button id="first-page" type="button" title="Primeira página">«</button><button id="previous-page" type="button" title="Página anterior">‹</button><span id="page-number" class="current-page">1</span><button id="next-page" type="button" title="Próxima página">›</button><button id="last-page" type="button" title="Última página">»</button></div><select id="page-size" title="Itens por página"><option>5</option><option selected>10</option><option>25</option><option>50</option><option>100</option></select><span id="page-summary" class="page-summary">--</span></div></section>
     <section class="panel analyses-panel" id="analyses"><div class="panel-heading"><div><p class="eyebrow">RESULTADOS DO MODELO</p><h2>Análises registradas</h2></div></div><div class="table-wrap"><table><thead><tr><th>Vídeo</th><th>Classe</th><th>Risco</th><th>Frames suspeitos</th><th>Status</th></tr></thead><tbody id="analysis-table"></tbody></table></div></section>
+
+<section class="panel" id="metricas-avaliacao" style="margin-top:24px;padding:24px">
+  <div class="panel-heading">
+    <div>
+      <p class="eyebrow">AVALIAÇÃO EXPERIMENTAL</p>
+      <h2>Desempenho dos classificadores</h2>
+    </div>
+  </div>
+  <p class="muted" style="margin:12px 0 20px">
+    Métricas preliminares baseadas nos rótulos das pastas Normal e Shoplifting.
+    Não representam validação manual de furtos envolvendo bolsas ou mochilas.
+  </p>
+
+  <div id="comparativo-grafico" style="margin:20px 0 28px">
+    <h3 style="font-size:18px;margin-bottom:14px">
+      Comparativo Original × V2
+    </h3>
+    <div id="comparativo-barras"></div>
+    <p class="muted" style="margin-top:14px">
+      Comparação preliminar baseada nos rótulos das pastas.
+      Original: 182 vídeos. V2: 180 vídeos.
+      As amostras avaliadas não são exatamente iguais.
+    </p>
+    <p style="margin-top:10px;font-size:13px">
+      <strong>Testes V2 pendentes:</strong>
+      Normal (90).mp4 e Shoplifting (16).mp4.
+    </p>
+  </div>
+<div id="metricas-conteudo">Carregando m?tricas...</div>
+</section>
+<script>
+(async function () {
+  const container = document.getElementById('metricas-conteudo');
+  try {
+    const response = await fetch('/static/metricas_avaliacao.json');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    const nomes = [
+      ['acuracia','Acurácia'],
+      ['precisao','Precisão'],
+      ['recall','Recall'],
+      ['f1','F1-score'],
+      ['especificidade','Especificidade']
+    ];
+    container.innerHTML = Object.entries(data).map(([versao, m]) => `
+      <div style="margin-bottom:24px">
+        <h3 style="margin-bottom:12px">${versao} — ${m.avaliados}/182 vídeos avaliados</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px">
+          ${nomes.map(([chave,nome]) => `
+            <div style="border:1px solid #dedbd2;padding:14px;background:#fffdf7">
+              <small>${nome}</small>
+              <div style="font-size:24px;font-weight:700">${m[chave].toFixed(2)}%</div>
+            </div>
+          `).join('')}
+        </div>
+        <p style="margin:14px 0 8px"><strong>Matriz de confusão</strong></p>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse">
+            <thead><tr>
+              <th>R?tulo da pasta</th>
+              <th>Previsto FURTO</th>
+              <th>Previsto NAO_FURTO</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>Shoplifting</td><td>${m.tp} (TP)</td><td>${m.fn} (FN)</td></tr>
+              <tr><td>Normal</td><td>${m.fp} (FP)</td><td>${m.tn} (TN)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:10px">
+          Execuções pendentes: ${m.pendentes}
+        </p>
+      </div>
+    `).join('');
+  } catch (error) {
+    container.textContent = 'Não foi poss?vel carregar as m?tricas: ' + error.message;
+  }
+})();
+</script>
+
   </main>
+
+<script id="script-comparativo-metricas">
+(async function () {
+  const container = document.getElementById('comparativo-barras');
+  if (!container) return;
+
+  try {
+    const response = await fetch('/static/metricas_avaliacao.json');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+
+    const data = await response.json();
+
+    const metricas = [
+      ['acuracia', 'Acurácia'],
+      ['precisao', 'Precisão'],
+      ['recall', 'Recall'],
+      ['f1', 'F1-score'],
+      ['especificidade', 'Especificidade']
+    ];
+
+    container.innerHTML = metricas.map(([key, nome]) => {
+      const original = Number(data.Original[key]);
+      const v2 = Number(data.V2[key]);
+
+      return `
+        <div style="margin-bottom:18px">
+          <strong style="display:block;margin-bottom:7px;font-size:13px">
+            ${nome}
+          </strong>
+
+          <div style="display:grid;grid-template-columns:70px 1fr 65px;gap:8px;align-items:center;margin-bottom:5px">
+            <span>Original</span>
+            <div style="height:17px;background:#eee9dc">
+              <div style="width:${original}%;height:100%;background:#b99400"></div>
+            </div>
+            <strong>${original.toFixed(2)}%</strong>
+          </div>
+
+          <div style="display:grid;grid-template-columns:70px 1fr 65px;gap:8px;align-items:center">
+            <span>V2</span>
+            <div style="height:17px;background:#eee9dc">
+              <div style="width:${v2}%;height:100%;background:#418c63"></div>
+            </div>
+            <strong>${v2.toFixed(2)}%</strong>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+  } catch (error) {
+    container.textContent = 'Erro ao carregar gráfico: ' + error.message;
+  }
+})();
+</script>
+
   <script src="{{ url_for('static', filename='app.js', v='26') }}"></script>
 </body>
 </html>

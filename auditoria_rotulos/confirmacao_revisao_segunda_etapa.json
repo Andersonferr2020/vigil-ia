@@ -1,0 +1,10 @@
+{
+  "etapa": "revisao_mochilas_ausentes",
+  "data_confirmacao": "2026-10-24T22:12:25",
+  "total_imagens": 1439,
+  "imagens_marcadas_no_editor": 695,
+  "imagens_sem_marcacao_individual": 744,
+  "confirmacao_usuario": "Todas as imagens foram visualizadas. A navegacao incluiu os comandos Proxima e Espaco.",
+  "tipo_confirmacao": "declaracao_global_do_revisor",
+  "observacao": "A confirmacao global nao substitui os registros individuais do editor. Os arquivos de progresso e os rotulos originais permanecem inalterados."
+}

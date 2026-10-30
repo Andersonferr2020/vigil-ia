@@ -1,0 +1,21 @@
+﻿# VIGIL-IA - Dependencias principais
+# Ambiente validado: Python 3.12.6 / Windows
+#
+# Instale PyTorch e torchvision separadamente,
+# conforme a configuracao de CPU ou GPU.
+#
+# Ambiente original:
+# torch==2.5.1+cu121
+# torchvision==0.20.1+cu121
+
+ultralytics==8.4.181
+opencv-python==5.0.0.93
+numpy==2.5.2
+scikit-fuzzy==0.5.0
+Flask==3.1.2
+Flask-SocketIO==5.5.1
+imageio-ffmpeg==0.6.0
+scipy==1.18.1
+Pillow==12.3.0
+PyYAML==6.0.3
+lap==0.5.13

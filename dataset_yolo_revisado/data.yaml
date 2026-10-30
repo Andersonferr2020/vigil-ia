@@ -1,0 +1,8 @@
+path: dataset_yolo_revisado
+train: images/train
+val: images/val
+test: images/test
+nc: 2
+names:
+  0: person
+  1: backpack_bag

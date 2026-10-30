@@ -34,3 +34,72 @@ teste_shoplifting.jpg
 # Modelos e caches adicionais
 *.pt
 *.cache
+
+# ===== Publicacao VIGIL-IA =====
+
+# Backups e arquivos temporarios
+*.backup*
+*.bak
+*.cache
+*.zip
+*_backup_*.py
+*.sqlite3
+
+# Videos originais autorizados
+!Dataset/
+!Dataset/Normal/
+!Dataset/Shoplifting/
+!Dataset/Normal/*.mp4
+!Dataset/Shoplifting/*.mp4
+
+# Dataset YOLO revisado
+!dataset_yolo_revisado/
+!dataset_yolo_revisado/**/
+
+# Resultados historicos e modelo atual
+!runs/
+!runs/detect/
+!runs/detect/avaliacoes_dataset_revisado/
+!runs/detect/avaliacoes_dataset_revisado/**/
+!runs/detect/treino_vigilia_M4_revisado/
+!runs/detect/treino_vigilia_M4_revisado/**/
+
+# Excluir pesos antigos e checkpoints
+runs/**/*.pt
+
+# Manter somente o peso final do M4
+!runs/detect/treino_vigilia_M4_revisado/weights/best.pt
+
+# Peso necessario para a analise por pose
+!yolov8n-pose.pt
+
+# Excluir caches do dashboard
+data_visualizer/cache/
+data_visualizer/vigil_ia.sqlite3
+
+
+# ===== Arquivos intermediarios e experimentos antigos =====
+
+labels_revisados_iou90/
+labels_train_experimento_anterior/
+
+# Scripts de backup
+*backup*.py
+*antes_*.py
+
+# Pacotes de relatorio duplicados
+material_relatorio_TCC_M4.zip
+
+# Arquivos temporarios de auditoria
+auditoria_rotulos/investigacao_60_imagens.zip
+auditoria_rotulos/investigacao_60_imagens_4_paineis.zip
+
+# ===== Arquivos intermediarios da auditoria =====
+/auditoria_rotulos/rotulos_revisados_pessoas/
+/auditoria_rotulos/rotulos_revisados_multiplas_mochilas/
+/auditoria_rotulos/rotulos_revisados_ausentes/
+/auditoria_rotulos/rotulos_revisados/
+/auditoria_rotulos/investigacao_60_imagens/
+# ===== Copias do material do relatorio =====
+/material_relatorio_TCC_M4/
+/dividir_dataset_backup_20261018_142556.py

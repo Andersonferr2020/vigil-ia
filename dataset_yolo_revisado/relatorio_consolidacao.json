@@ -1,0 +1,22 @@
+{
+  "projeto": "VIGIL-IA",
+  "data_consolidacao": "2026-10-25T22:11:08.937302",
+  "origem": "dataset_yolo_final",
+  "destino": "dataset_yolo_revisado",
+  "imagens": {
+    "train": 14023,
+    "val": 2975,
+    "test": 3298
+  },
+  "rotulos_aplicados": {
+    "etapa_1": 124,
+    "etapa_2": 1385,
+    "etapa_3": 2166,
+    "etapa_4": 3729
+  },
+  "auditoria_visual_confirmada": {
+    "imagens_distintas": 3729,
+    "etapa_pessoas": 3729
+  },
+  "observacao": "Inspecao visual confirmada pelo pesquisador. Marcacoes individuais de conclusao nao foram registradas em todas as etapas."
+}
